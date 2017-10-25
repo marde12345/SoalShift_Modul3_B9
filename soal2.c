@@ -10,8 +10,6 @@ char player1[100],player2[100];
 
 void hello(){
 	printf("Selamat datang di Game Aidil cari MINE\n");
-	printf("Start (Press any key)\n");
-	system("pause");
 }
 
 int cekmine(){
@@ -22,35 +20,68 @@ int cekmine(){
 }
 
 void view(){
+	system("clear");
 	time_t now;
 	now=time(NULL);
 	printf("Score pada permainan ini %s\n", ctime(&now));
-	printf("Score %s\n",player1);
-	printf("Score %s\n",player2);
+	printf("Score %s %d\n",player1,sc1);
+	printf("Score %s %d\n",player2,sc2);
 }
 
 void * turn1(){
-
-}
-
-void * turn2(){
-	printf("Giliran player 2\n");
+	printf("Giliran %s\n",player1);
 	printf("Masukkan nomor lubang yang ingin dipasang ranjau\n");
 	printf("ketik ""-1"" untuk mengakhiri pemasangan MINE\n\n\n");
-	printf("Masukkan Nomor Lubang : ");
+	printf("Masukkan Nomor Lubang : \n");
 	int n,con=0;
-	scanf("%d",&n);
-	con++;
-	while(con<5||n!=-1){
-		if(p2[n-1]==0)p2[n-1]=1;
+	while(con<4&&n!=-1){
+		scanf("%d",&n);
+		if(p1[n-1]==0){
+			con++;
+			p1[n-1]=1;
+		}
 		else{
 			printf("Mine sudah terpasang masukkan ke lubang lain\n");
 			continue;
 		}
-		scanf("%d",&n);
-		con++;
 	}
 
+	system("clear");
+	printf("Saatnya %s menebak MINE\n", player2);
+	con=4;
+	while(con--){
+		scanf("%d",&n);
+		if(p1[n-1]==1) sc1++;
+		else sc2++;
+	}
+}
+
+void * turn2(){
+	printf("\n\nGiliran %s\n",player2);
+	printf("Masukkan nomor lubang yang ingin dipasang ranjau\n");
+	printf("ketik ""-1"" untuk mengakhiri pemasangan MINE\n\n\n");
+	printf("Masukkan Nomor Lubang : \n");
+	int n,con=0;
+	while(con<4&&n!=-1){
+		scanf("%d",&n);
+		if(p2[n-1]==0){
+			con++;
+			p2[n-1]=1;
+		}
+		else{
+			printf("Mine sudah terpasang masukkan ke lubang lain\n");
+			continue;
+		}
+	}
+
+	system("clear");
+	printf("Saatnya %s menebak MINE\n", player1);
+	con=4;
+	while(con--){
+		scanf("%d",&n);
+		if(p2[n-1]==1) sc2++;
+		else sc1++;
+	}
 }
 
 int main(){
@@ -71,6 +102,7 @@ int main(){
 			exit(EXIT_FAILURE);
 		}
 		pthread_join(tid[0],NULL);
+		view();
 		if(pthread_create(&(tid[1]),NULL,&turn2,NULL)!=0){
 			exit(EXIT_FAILURE);
 		}
