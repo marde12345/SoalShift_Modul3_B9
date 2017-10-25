@@ -60,8 +60,19 @@ int main(){
 				printf("SS2-V5 %d\n",*data[3]);
 				printf("SPG1-V3 %d\n",*data[4]);
 				printf("MINE %d\n\n",*data[5]);
+				printf("Masukkan pilihan anda : \n");
 
-				beli();
+				int ban; char weap[7];
+				scanf("%s%d",weap,&ban);
+				int lala=counter(weap);
+
+				if(ban>*data[lala]){
+					printf("Maaf, Stock kami kurang, silahkan tanya sebelah\n");
+					continue;
+				}
+
+				*data[lala]-=ban;
+
 				break;
 			}
 			case 3 :{
