@@ -24,16 +24,21 @@ void hello(){
 	printf("Masukkan pilihan anda : ");
 }
 
-void list(){
-
+void list(int *data[]){
+	char name[6][7]={"MP4A1","PM2-V1","SPR-3","SS2-V5","SPG1-V3","MINE"};
+	int i;
+	for(i=0;i<6;i++){
+		if(*data[i]) printf("%s %d",name[i],*data[i]);
+	}
 }
+
 int main(){
 	int supply[6];
 	key_t key = 112358;
 	int **data;
 
 	int shmid=shmget(key,6*sizeof(int), IPC_CREAT | 0666);
-	*data = shmat(shmid,NULL,0);
+	data = shmat(shmid,NULL,0);
 
 	while(1){
 		int input;
@@ -42,10 +47,20 @@ int main(){
 		scanf("%d",&input);
 		switch (input){
 			case 1 :{
-				list(data[]);
+				system("clear");
+				list(data);
 				break;
 			}
 			case 2 :{
+				system("clear");
+				printf("Untuk pembelian masukkan [NAMA_SENJATA] [JUMLAH]\n");
+				printf("MP4A1 %d\n",*data[0]);
+				printf("PM2-V1 %d\n",*data[1]);
+				printf("SPR-3 %d\n",*data[2]);
+				printf("SS2-V5 %d\n",*data[3]);
+				printf("SPG1-V3 %d\n",*data[4]);
+				printf("MINE %d\n\n",*data[5]);
+
 				beli();
 				break;
 			}
