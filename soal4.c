@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 void swap(int *xp, int *yp){
     int temp = *xp;
@@ -16,12 +17,12 @@ void bubbleSort(int arr[], int n){
 }
 
 int main(int argc, char **argv){
-	int x=argc-1;
-	int data[x];
-	// while(x--){
-	// 	char temp[256];
-	// 	strcpy(temp,argv[x]);
-	// 	data[x]=atoi(temp)-1;
-	// }
-	// for(x=0;x<argc-1;x++) printf("%d\n",data[x]);
+	int x=argc;
+	int data[x-1];
+	for(x=0;x<argc-1;x++){
+		char temp[256];
+		strcpy(temp,argv[x+1]);
+		data[x]=atoi(temp);
+	}
+	for(x=0;x<argc-1;x++) printf("%s %d\n",argv[x+1],data[x]);
 }
