@@ -4,7 +4,7 @@
 #include <pthread.h>
 #include <unistd.h>
 
-int p1[16],p2[16];
+int p1[16]={},p2[16]={};
 int sc1=0,sc2=0;
 char player1[100],player2[100];
 
@@ -34,6 +34,22 @@ void * turn1(){
 }
 
 void * turn2(){
+	printf("Giliran player 2\n");
+	printf("Masukkan nomor lubang yang ingin dipasang ranjau\n");
+	printf("ketik ""-1"" untuk mengakhiri pemasangan MINE\n\n\n");
+	printf("Masukkan Nomor Lubang : ");
+	int n,con=0;
+	scanf("%d",&n);
+	con++;
+	while(con<5||n!=-1){
+		if(p2[n-1]==0)p2[n-1]=1;
+		else{
+			printf("Mine sudah terpasang masukkan ke lubang lain\n");
+			continue;
+		}
+		scanf("%d",&n);
+		con++;
+	}
 
 }
 
