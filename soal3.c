@@ -25,7 +25,24 @@ void *KepitingLapar(){
 	Kepitingstat-=10;
 }
 
+void *Makanin(void * arg){
+	int num=*((int *)arg);
+	if(num==1) Lohanstat+=10;
+	if(num==2) Kepitingstat+=10;
+}
+
 int main(){
 	hello();
+	if
+	while(1){
+		if(Lohanstat<=0 || 
+			Lohanstat >100 || 
+			Kepitingstat<=0 || 
+			Kepitingstat>100){
+		system(clear);
+		printf("Anda sudah kalah :(\n");
+		break;
+		}
 
+	}
 }
