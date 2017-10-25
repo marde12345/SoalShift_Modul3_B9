@@ -8,6 +8,19 @@ int p1[16],p2[16];
 int sc1=0,sc2=0;
 char player1[100],player2[100];
 
+void hello(){
+	printf("Selamat datang di Game Aidil cari MINE\n");
+	printf("Start (Press any key)\n");
+	system("pause");
+}
+
+int cekmine(){
+	int i,cona=0,conb=0;
+	for(i=0;i<16;i++) cona+=p1[i];
+	for(i=0;i<16;i++) conb+=p2[i];
+	if(cona==16&&conb==16) return 1; else return 0;
+}
+
 void view(){
 	time_t now;
 	now=time(NULL);
@@ -16,10 +29,35 @@ void view(){
 	printf("Score %s\n",player2);
 }
 
+void * turn1(){
+
+}
+
+void * turn2(){
+
+}
+
 int main(){
 	pthread_t tid[2];
+	hello();
 	printf("Masukkan Nickname Player 1 : "); scanf("%s",player1);
 	printf("Masukkan Nickname Player 2 : "); scanf("%s",player2);
 
-
+	while(1){
+		system("clear");
+		view();
+		if(sc1==10 || sc2==10 || cekmine()){
+		system("clear");
+		printf("\n\n\nGame Over :(\n\n\n\n");
+		break;
+		}
+		if(pthread_create(&(tid[0]),NULL,&turn1,NULL)!=0){
+			exit(EXIT_FAILURE);
+		}
+		pthread_join(tid[0],NULL);
+		if(pthread_create(&(tid[1]),NULL,&turn2,NULL)!=0){
+			exit(EXIT_FAILURE);
+		}
+		pthread_join(tid[1],NULL);
+	}
 }
