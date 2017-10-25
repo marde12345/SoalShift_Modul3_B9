@@ -1,8 +1,8 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include<unistd.h>
-#include<pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <pthread.h>
 
 void *count(void * arg){
 	FILE *in=NULL;
@@ -15,7 +15,7 @@ void *count(void * arg){
 	strcat(command,"' Novel.txt | wc -l");
 	in=popen(command,"r");
 	fgets(tempin,255,in);
-	get=atoi(tempin)-1;
+	get=atoi(tempin);
 	printf("%d\n",get);
 	// system(command);
 	sleep(1);
