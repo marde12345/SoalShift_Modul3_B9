@@ -29,6 +29,7 @@ void view(){
 }
 
 void * turn1(){
+	view();
 	printf("Giliran %s\n",player1);
 	printf("Masukkan nomor lubang yang ingin dipasang ranjau\n");
 	printf("ketik ""-1"" untuk mengakhiri pemasangan MINE\n\n\n");
@@ -47,6 +48,7 @@ void * turn1(){
 	}
 
 	system("clear");
+	view();
 	printf("Saatnya %s menebak MINE\n", player2);
 	con=4;
 	while(con--){
@@ -57,6 +59,7 @@ void * turn1(){
 }
 
 void * turn2(){
+	view();
 	printf("\n\nGiliran %s\n",player2);
 	printf("Masukkan nomor lubang yang ingin dipasang ranjau\n");
 	printf("ketik ""-1"" untuk mengakhiri pemasangan MINE\n\n\n");
@@ -75,6 +78,7 @@ void * turn2(){
 	}
 
 	system("clear");
+	view();
 	printf("Saatnya %s menebak MINE\n", player1);
 	con=4;
 	while(con--){
@@ -102,7 +106,6 @@ int main(){
 			exit(EXIT_FAILURE);
 		}
 		pthread_join(tid[0],NULL);
-		view();
 		if(pthread_create(&(tid[1]),NULL,&turn2,NULL)!=0){
 			exit(EXIT_FAILURE);
 		}
