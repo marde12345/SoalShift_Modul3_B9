@@ -17,7 +17,6 @@ void *count(void * arg){
 	fgets(tempin,255,in);
 	get=atoi(tempin);
 	printf("%d\n",get);
-	// system(command);
 	sleep(1);
 }
 
