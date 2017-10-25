@@ -66,7 +66,7 @@ int main(){
 			Kepitingstat<=0 || 
 			Kepitingstat>100){
 		system("clear");
-		printf("Anda sudah kalah :(\n");
+		printf("\n\n\nAnda sudah kalah :(\n\n\n\n");
 		break;
 		}
 
