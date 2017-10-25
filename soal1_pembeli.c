@@ -14,6 +14,9 @@ typedef struct weapon{
 } weapon_entry;
 
 int main(){
-
+	key_t key = 1123458;
+	struct weapon_entry *supply;
+	int shmid = shmget(key,sizeof(weapon_entry), IPC_CREAT | 0666);
+	supply=(weapon_entry *) shmat(shmid,NULL,0);
 	return 0;
 }
