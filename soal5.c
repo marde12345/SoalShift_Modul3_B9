@@ -5,13 +5,19 @@
 #include<pthread.h>
 
 void *count(void * arg){
+	FILE *in=NULL;
+	char tempin[256];
+	int get=0;
 	char *key=(void *)arg;
 	char command[1000]="";
-	printf("%s : ",key);
 	strcat(command,"grep -o '");
 	strcat(command,key);
 	strcat(command,"' Novel.txt | wc -l");
-	system(command);
+	in=popen(command,"r");
+	fgets(tempin,255,in);
+	get=atoi(tempin)-1;
+	printf("%d\n",get);
+	// system(command);
 	sleep(1);
 }
 
@@ -20,6 +26,7 @@ int main(int argc, char **argv){
 	int i;
 
 	for(i=1;i<argc;i++){
+		printf("%s : ",argv[i]);
 		if(pthread_create(&(tid[i]),NULL,&count,argv[i])!=0){
 			exit(EXIT_FAILURE);
 		}
