@@ -6,6 +6,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void view(){
+	system("clear");
+
+	printf("********************************\n");
+	printf("*                              *\n");
+	printf("* Selamat datang Master Hawari *\n");
+	printf("*                              *\n");
+	printf("********************************\n");
+	printf("1. List Barang\n");
+	printf("2. Kula'an Barang ~Powered by Underground~\n");
+	printf("3. Exit\n\n");
+	printf("Pilihan : ");
+}
+
 typedef struct Weapon{
 	char name[8];
 	int stock;
@@ -16,12 +30,15 @@ void list(struct Weapon weap[],int p_shmid){
 	printf("Persediaan senjata black-market HAWARI\n\n");
 	printf("Connected to SHMID : %d\n", p_shmid);
 	printf("**************************************\n\n");
-	if(weap[0].stock>0)printf("%s %d\n",weap[0].name,weap[0].stock);
-	if(weap[1].stock>0)printf("%s %d\n",weap[1].name,weap[1].stock);
-	if(weap[2].stock>0)printf("%s %d\n",weap[2].name,weap[2].stock);
-	if(weap[3].stock>0)printf("%s %d\n",weap[3].name,weap[3].stock);
-	if(weap[4].stock>0)printf("%s %d\n",weap[4].name,weap[4].stock);
-	if(weap[5].stock>0)printf("%s %d\n",weap[5].name,weap[5].stock);
+	if(weap[0].stock>0)printf("%s\t%d\n",weap[0].name,weap[0].stock);
+	if(weap[1].stock>0)printf("%s\t%d\n",weap[1].name,weap[1].stock);
+	if(weap[2].stock>0)printf("%s\t%d\n",weap[2].name,weap[2].stock);
+	if(weap[3].stock>0)printf("%s\t%d\n",weap[3].name,weap[3].stock);
+	if(weap[4].stock>0)printf("%s\t%d\n",weap[4].name,weap[4].stock);
+	if(weap[5].stock>0)printf("%s\t%d\n",weap[5].name,weap[5].stock);
+	printf("Press any key to continue...\n");
+	getchar();
+	getchar();
 }
 
 void tambah(struct Weapon weap[],int p_shmid){
@@ -40,6 +57,9 @@ void tambah(struct Weapon weap[],int p_shmid){
 	if(strcmp(weap[3].name,stemp)==0)weap[3].stock+=temp;
 	if(strcmp(weap[4].name,stemp)==0)weap[4].stock+=temp;
 	if(strcmp(weap[5].name,stemp)==0)weap[5].stock+=temp;
+	printf("Press any key to continue...\n");
+	getchar();
+	getchar();
 }
 
 void init(struct Weapon weap[]){
@@ -74,13 +94,33 @@ int main(){
 
 	init(p_weap);
 
-	
-
-
-	//Detach
-	shmdt(p_weap);
-	//control
-	shmctl(shmid, IPC_RMID, NULL);	
-		
-	return 0;
+	while(1){
+		view();
+		int pil;
+		scanf("%d",&pil);
+		switch (pil){
+			case 1 :{
+				list(p_weap,shmid);
+				break;
+			}
+			case 2 :{
+				tambah(p_weap,shmid);
+				break;
+			}
+			case 3 :{
+				//Detach
+				shmdt(p_weap);
+				//control
+				shmctl(shmid, IPC_RMID, NULL);	
+				system("clear");
+				return 0;
+			}
+			default :{
+				printf("Salah inputan Master!! Coba lagi...\n");
+				printf("Press any key to continue...\n");
+				getchar();
+				break;
+			}
+		}
+	}
 }
