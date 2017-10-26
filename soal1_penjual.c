@@ -46,17 +46,22 @@ void tambah(struct Weapon weap[],int p_shmid){
 	printf("Kula'an senjata black-market HAWARI\n\n");
 	printf("Connected to SHMID : %d\n", p_shmid);
 	printf("**************************************\n");
+	printf("List senjata : MP4A1, PM2-V1, SPR-3, SS2-V5, SPG1-V3, MINE\n");
 	printf("Ex. --> MP4A1 100\n\n--> ");
 	char stemp[8];
 	int temp;
 	scanf("%s%d",stemp,&temp);
 
-	if(strcmp(weap[0].name,stemp)==0)weap[0].stock+=temp;
-	if(strcmp(weap[1].name,stemp)==0)weap[1].stock+=temp;
-	if(strcmp(weap[2].name,stemp)==0)weap[2].stock+=temp;
-	if(strcmp(weap[3].name,stemp)==0)weap[3].stock+=temp;
-	if(strcmp(weap[4].name,stemp)==0)weap[4].stock+=temp;
-	if(strcmp(weap[5].name,stemp)==0)weap[5].stock+=temp;
+	if(strcmp(weap[0].name,stemp)==0)weap[0].stock+=temp;else
+	if(strcmp(weap[1].name,stemp)==0)weap[1].stock+=temp;else
+	if(strcmp(weap[2].name,stemp)==0)weap[2].stock+=temp;else
+	if(strcmp(weap[3].name,stemp)==0)weap[3].stock+=temp;else
+	if(strcmp(weap[4].name,stemp)==0)weap[4].stock+=temp;else
+	if(strcmp(weap[5].name,stemp)==0)weap[5].stock+=temp;else
+	{
+		printf("Maaf, senjatanya belum dibentuk\n\n");
+	}
+	
 	printf("Press any key to continue...\n");
 	getchar();
 	getchar();
